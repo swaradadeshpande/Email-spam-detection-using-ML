@@ -198,6 +198,15 @@ Classification Report
     weighted avg    0.97      0.97      0.97      1034
 
 
+## Output Screenshots
+
+<img width="1855" height="844" alt="Screenshot 2026-06-02 000541" src="https://github.com/user-attachments/assets/fdb08fd9-a738-48da-b410-af780308ad82" />
+
+<img width="1882" height="826" alt="Screenshot 2026-06-02 000358" src="https://github.com/user-attachments/assets/c17b7195-3d72-4a5d-a496-b193355e2fad" />
+
+<img width="1880" height="783" alt="Screenshot 2026-06-02 000414" src="https://github.com/user-attachments/assets/b92ed56b-5967-426b-8931-9a1de6a9639e" />
+
+
 ## 💻 Installation
 
 ### Clone Repository
