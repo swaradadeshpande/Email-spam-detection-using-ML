@@ -125,7 +125,7 @@ This application uses:
 
 ### Model
 
-Multinomial Naive Bayes
+Random Forest Classifier
 
 ### Accuracy
 
@@ -157,7 +157,7 @@ with col2:
     st.metric("Accuracy", "97.29%")
 
 with col3:
-    st.metric("Model", "Naive Bayes")
+    st.metric("Model", "Random Forest Classifie")
 
 st.write("")
 
