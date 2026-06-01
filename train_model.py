@@ -44,3 +44,51 @@ def clean_text(text):
 
 # Apply cleaning
 df['message'] = df['message'].apply(clean_text)
+
+# Convert labels
+df['label'] = df['label'].map({
+    'ham': 0,
+    'spam': 1
+})
+
+# Feature Extraction
+vectorizer = TfidfVectorizer(max_features=3000)
+
+X = vectorizer.fit_transform(df['message'])
+
+y = df['label']
+
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=42
+)
+
+# Train Model
+model = MultinomialNB()
+
+model.fit(X_train, y_train)
+
+# Prediction
+y_pred = model.predict(X_test)
+
+# Evaluation
+print("\nAccuracy:", accuracy_score(y_test, y_pred))
+
+print("\nClassification Report:\n")
+print(classification_report(y_test, y_pred))
+
+# Save Model
+pickle.dump(
+    model,
+    open("models/spam_model.pkl", "wb")
+)
+
+pickle.dump(
+    vectorizer,
+    open("models/vectorizer.pkl", "wb")
+)
+
+print("\nModel Saved Successfully!")
