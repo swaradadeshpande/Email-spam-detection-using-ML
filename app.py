@@ -30,106 +30,245 @@ st.set_page_config(
 st.markdown("""
 <style>
 
+/* Main App Background */
 .stApp{
-    background-color:#0b1120;
+    background: linear-gradient(
+        135deg,
+        #f4f7ff 0%,
+        #eef2ff 100%
+    );
 }
 
+/* Main Text */
+html, body, [class*="css"]{
+    color:#1f2937;
+}
+
+/* Hero Section */
 .hero{
-    background:linear-gradient(
-    -45deg,
-    #00c6ff,
-    #0072ff,
-    #8e2de2,
-    #4a00e0
+    background: linear-gradient(
+        135deg,
+        #4f46e5,
+        #7c3aed,
+        #2563eb
     );
 
-    background-size:400% 400%;
+    padding:45px;
 
-    animation:gradient 15s ease infinite;
+    border-radius:25px;
 
-    padding:40px;
-    border-radius:20px;
     text-align:center;
+
     color:white;
-    margin-bottom:20px;
+
+    margin-bottom:25px;
+
+    box-shadow:0px 10px 30px rgba(
+        79,
+        70,
+        229,
+        0.3
+    );
 }
 
-@keyframes gradient{
-
-0%{
-background-position:0% 50%;
-}
-
-50%{
-background-position:100% 50%;
-}
-
-100%{
-background-position:0% 50%;
-}
-}
-
+/* Glass Card */
 .card{
 
-background:rgba(
-255,
-255,
-255,
-0.08
-);
+    background:white;
 
-backdrop-filter:blur(12px);
+    padding:25px;
 
-padding:25px;
+    border-radius:20px;
 
-border-radius:20px;
+    box-shadow:
+    0px 4px 25px rgba(
+        0,
+        0,
+        0,
+        0.08
+    );
 
-border:1px solid rgba(
-255,
-255,
-255,
-0.15
-);
-
-margin-bottom:20px;
+    margin-bottom:25px;
 }
 
-.footer{
+/* Metric Cards */
+[data-testid="metric-container"]{
 
-text-align:center;
-color:gray;
-padding:20px;
-margin-top:40px;
+    background:white;
+
+    border-radius:16px;
+
+    padding:15px;
+
+    box-shadow:
+    0px 4px 15px rgba(
+        0,
+        0,
+        0,
+        0.08
+    );
+
+    border:1px solid #e5e7eb;
 }
 
+/* Text Area */
+textarea{
+
+    border-radius:15px !important;
+
+    border:2px solid #dbeafe !important;
+
+    background:#ffffff !important;
+
+    color:#111827 !important;
+
+    font-size:16px !important;
+}
+
+/* Analyze Button */
+.stButton > button{
+
+    width:100%;
+
+    height:55px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:linear-gradient(
+        135deg,
+        #4f46e5,
+        #7c3aed
+    );
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    transition:0.3s;
+}
+
+.stButton > button:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+    0px 8px 20px rgba(
+        79,
+        70,
+        229,
+        0.4
+    );
+}
+
+/* Spam Result */
 .result-spam{
 
-background:#7f1d1d;
+    background:linear-gradient(
+        135deg,
+        #ef4444,
+        #dc2626
+    );
 
-padding:20px;
+    color:white;
 
-border-radius:15px;
+    padding:25px;
 
-font-size:22px;
+    border-radius:20px;
 
-font-weight:bold;
+    font-size:22px;
 
-color:white;
+    font-weight:bold;
+
+    box-shadow:
+    0px 8px 20px rgba(
+        239,
+        68,
+        68,
+        0.3
+    );
 }
 
+/* Ham Result */
 .result-ham{
 
-background:#14532d;
+    background:linear-gradient(
+        135deg,
+        #10b981,
+        #059669
+    );
 
-padding:20px;
+    color:white;
 
-border-radius:15px;
+    padding:25px;
 
-font-size:22px;
+    border-radius:20px;
 
-font-weight:bold;
+    font-size:22px;
 
-color:white;
+    font-weight:bold;
+
+    box-shadow:
+    0px 8px 20px rgba(
+        16,
+        185,
+        129,
+        0.3
+    );
+}
+
+/* Sidebar */
+section[data-testid="stSidebar"]{
+
+    background:linear-gradient(
+        180deg,
+        #1e1b4b,
+        #312e81
+    );
+}
+
+section[data-testid="stSidebar"] *{
+
+    color:white !important;
+}
+
+/* DataFrame */
+[data-testid="stDataFrame"]{
+
+    background:white;
+
+    border-radius:15px;
+}
+
+/* Footer */
+.footer{
+
+    text-align:center;
+
+    color:#6b7280;
+
+    font-size:14px;
+
+    margin-top:40px;
+
+    padding:20px;
+}
+
+/* Headers */
+h1,h2,h3{
+
+    color:#111827;
+}
+
+.hero h1,
+.hero h2,
+.hero h3,
+.hero p{
+
+    color:white;
 }
 
 </style>
@@ -595,7 +734,7 @@ Team
 st.markdown("""
 <div class="footer">
 
-Built with ❤️ using
+Built using
 Python • NLP • Random Forest • Plotly • Streamlit
 
 </div>
