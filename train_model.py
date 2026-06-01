@@ -6,8 +6,8 @@ import nltk
 from nltk.corpus import stopwords
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import accuracy_score, classification_report
+from sklearn.ensemble import RandomForestClassifier
 
 # Download stopwords
 nltk.download('stopwords')
@@ -67,22 +67,23 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 # Train Model
-model = MultinomialNB()
+rf_model = RandomForestClassifier(
+    n_estimators=100,
+    random_state=42
+)
 
-model.fit(X_train, y_train)
+rf_model.fit(X_train, y_train)
 
-# Prediction
-y_pred = model.predict(X_test)
+rf_pred = rf_model.predict(X_test)
 
-# Evaluation
-print("\nAccuracy:", accuracy_score(y_test, y_pred))
-
+print("Random Forest Accuracy:",
+      accuracy_score(y_test, rf_pred))
 print("\nClassification Report:\n")
-print(classification_report(y_test, y_pred))
+print(classification_report(y_test, rf_pred))
 
 # Save Model
 pickle.dump(
-    model,
+    rf_model,
     open("models/spam_model.pkl", "wb")
 )
 
