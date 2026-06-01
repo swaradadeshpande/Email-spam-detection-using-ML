@@ -72,15 +72,13 @@ Email-Spam-Detection-ML/
 ├── dataset/
 │   └── spam.csv
 │
-├── notebooks/
-│   └── analysis.ipynb
 │
 ├── models/
 │   ├── spam_model.pkl
 │   └── vectorizer.pkl
-│
+|
 ├── app.py
-├── spam_detector.py
+├── train_model.py
 ├── requirements.txt
 ├── README.md
 └── screenshots/
@@ -124,10 +122,8 @@ TF-IDF Vectorization converts textual data into numerical features.
 
 ### 6. Model Training
 
-Machine Learning models used:
+Machine Learning model used:
 
-* Multinomial Naive Bayes
-* Logistic Regression
 * Random Forest Classifier
 
 ### 7. Model Evaluation
@@ -175,21 +171,6 @@ Generated separate word clouds for:
 
 ---
 
-## 🤖 Machine Learning Models
-
-### Multinomial Naive Bayes
-
-Most suitable for text classification tasks.
-
-### Logistic Regression
-
-Provides strong baseline performance.
-
-### Random Forest
-
-Used for comparison and benchmarking.
-
----
 
 ## 📊 Evaluation Metrics
 
@@ -204,13 +185,18 @@ Confusion Matrix
 Classification Report
 ```
 
-Expected Accuracy:
+### Random Forest Accuracy: 0.9729206963249516
 
-```text
-97% - 99%
-```
+### Classification Report:
 
----
+              precision    recall  f1-score   support
+
+           0       0.97      1.00      0.98       889
+           1       0.98      0.82      0.89       145
+    accuracy                           0.97      1034
+    macro avg       0.98      0.91      0.94      1034
+    weighted avg    0.97      0.97      0.97      1034
+
 
 ## 💻 Installation
 
