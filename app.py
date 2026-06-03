@@ -382,7 +382,7 @@ with st.sidebar:
 
     st.markdown("---")
 
-    st.success("Model: Random Forest")
+    st.success("Model: Random Forest Classifier")
 
     st.info("Accuracy: 97.29%")
 
@@ -390,7 +390,7 @@ with st.sidebar:
 
     st.subheader("Features")
 
-    st.write("✅ Spam Detection")
+    st.write("✅ Spam Detection and category")
     st.write("✅ NLP Processing")
     st.write("✅ Risk Analysis")
     st.write("✅ Interactive Dashboard")
