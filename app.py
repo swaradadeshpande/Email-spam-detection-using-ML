@@ -312,6 +312,67 @@ def clean_text(text):
 
     return " ".join(words)
 
+def get_spam_category(message):
+
+    message = message.lower()
+
+    categories = {
+
+        "Lottery Scam": [
+            "winner",
+            "won",
+            "prize",
+            "lottery",
+            "jackpot",
+            "reward",
+            "claim"
+        ],
+
+        "Phishing Attempt": [
+            "verify",
+            "bank",
+            "account",
+            "password",
+            "login",
+            "update account",
+            "security alert"
+        ],
+
+        "Financial Fraud": [
+            "loan",
+            "credit card",
+            "investment",
+            "profit",
+            "earn money",
+            "income"
+        ],
+
+        "Advertisement": [
+            "offer",
+            "sale",
+            "discount",
+            "deal",
+            "limited time"
+        ],
+
+        "Promotional": [
+            "free",
+            "subscribe",
+            "membership",
+            "exclusive",
+            "bonus"
+        ]
+    }
+
+    for category, keywords in categories.items():
+
+        for keyword in keywords:
+
+            if keyword in message:
+                return category
+
+    return "General Spam"
+
 # ---------------------------------
 # SIDEBAR
 # ---------------------------------
@@ -427,19 +488,22 @@ if check:
         # RESULT
 
         st.subheader("📊 Prediction Result")
+        spam_category = get_spam_category(message)
 
         if prediction[0] == 1:
 
             st.markdown(
-                f"""
-                <div class="result-spam">
-                🚨 SPAM MESSAGE DETECTED
-                <br><br>
-                Confidence: {confidence:.2f}%
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
+    f"""
+    <div class="result-spam">
+    🚨 SPAM MESSAGE DETECTED
+    <br><br>
+    Category: {spam_category}
+    <br><br>
+    Confidence: {confidence:.2f}%
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
         else:
 
@@ -458,16 +522,21 @@ if check:
 
         st.session_state.history.append({
 
-            "Message": message[:60],
+    "Message": message[:60],
 
-            "Prediction":
-                "Spam"
-                if prediction[0] == 1
-                else "Ham",
+    "Prediction":
+        "Spam"
+        if prediction[0] == 1
+        else "Ham",
 
-            "Confidence":
-                round(confidence, 2)
-        })
+    "Category":
+        spam_category
+        if prediction[0] == 1
+        else "Safe",
+
+    "Confidence":
+        round(confidence, 2)
+})
 
         # ---------------------------------
         # ANALYTICS
@@ -475,7 +544,7 @@ if check:
 
         st.subheader("📈 Message Analytics")
 
-        c1, c2, c3 = st.columns(3)
+        c1, c2, c3, c4 = st.columns(4)
 
         with c1:
             st.metric("Words", word_count)
@@ -488,6 +557,21 @@ if check:
                 "Spam Probability",
                 f"{spam_prob:.2f}%"
             )
+        with c4:
+
+           if prediction[0] == 1:
+
+             st.metric(
+            "Spam Category",
+            spam_category
+        )
+
+           else:
+
+             st.metric(
+            "Spam Category",
+            "N/A"
+        )
 
         # ---------------------------------
         # CHARTS
