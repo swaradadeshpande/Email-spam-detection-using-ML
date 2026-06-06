@@ -284,7 +284,9 @@ model = pickle.load(
 vectorizer = pickle.load(
     open("models/vectorizer.pkl", "rb")
 )
-
+feature_df = pd.read_csv(
+    "models/feature_importance.csv"
+)
 # ---------------------------------
 # SESSION STATE
 # ---------------------------------
@@ -372,6 +374,24 @@ def get_spam_category(message):
                 return category
 
     return "General Spam"
+
+def get_ml_keywords(cleaned_text):
+
+    words = cleaned_text.split()
+
+    important_words = feature_df[
+        feature_df["word"].isin(words)
+    ]
+
+    important_words = important_words.sort_values(
+
+        by="importance",
+
+        ascending=False
+
+    )
+
+    return important_words.head(10)
 
 # ---------------------------------
 # SIDEBAR
@@ -469,6 +489,8 @@ if check:
 
         cleaned = clean_text(message)
 
+        ml_keywords = get_ml_keywords(cleaned)
+
         vector = vectorizer.transform([cleaned])
 
         prediction = model.predict(vector)
@@ -492,18 +514,37 @@ if check:
 
         if prediction[0] == 1:
 
-            st.markdown(
-    f"""
-    <div class="result-spam">
-    🚨 SPAM MESSAGE DETECTED
-    <br><br>
-    Category: {spam_category}
-    <br><br>
-    Confidence: {confidence:.2f}%
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+          st.markdown(
+             f"""
+            <div class="result-spam">
+            🚨 SPAM MESSAGE DETECTED
+            <br><br>
+            Category: {spam_category}
+            <br><br>
+            Confidence: {confidence:.2f}%
+            </div>
+             """,
+            unsafe_allow_html=True
+          )
+          
+
+          if len(ml_keywords) > 0:
+
+           st.subheader(
+            "🧠 Important Keywords Identified By The Model"
+           )
+
+           display_df = ml_keywords.copy()
+
+           display_df["importance"] = (
+           display_df["importance"] * 100
+           ).round(3)
+
+           st.dataframe(
+           display_df,
+           use_container_width=True
+           )
+            
 
         else:
 
