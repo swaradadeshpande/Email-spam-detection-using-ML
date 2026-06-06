@@ -530,22 +530,27 @@ if check:
 
           if len(ml_keywords) > 0:
 
-           st.subheader(
-            "🧠 Important Keywords Identified By The Model"
-           )
+            keyword_fig = px.bar(
 
-           display_df = ml_keywords.copy()
+            ml_keywords,
 
-           display_df["importance"] = (
-           display_df["importance"] * 100
-           ).round(3)
+            x="word",
 
-           st.dataframe(
-           display_df,
-           use_container_width=True
-           )
+            y="importance",
+
+            title="Top Important Words Used By Model",
+
+            text_auto=".3f"
+            )
+
+            st.plotly_chart(
+
+            keyword_fig,
+
+            use_container_width=True
+
+            )
             
-
         else:
 
             st.markdown(
