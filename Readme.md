@@ -76,6 +76,7 @@ Email-Spam-Detection-ML/
 ├── models/
 │   ├── spam_model.pkl
 │   └── vectorizer.pkl
+│   └── feature_importance.csv
 |
 ├── app.py
 ├── train_model.py
@@ -169,6 +170,18 @@ Generated separate word clouds for:
 * Spam Messages
 * Ham Messages
 
+### ML-Based Keyword Highlighting
+
+The application uses Random Forest Feature Importance to identify which words contributed most to spam classification.
+
+Unlike rule-based keyword matching, this approach relies on words learned by the machine learning model during training.
+
+Features:
+- Top important words visualization
+- Interactive Plotly chart
+- Explainable AI component
+- Model-driven keyword analysis
+
 ---
 
 
@@ -206,6 +219,9 @@ Classification Report
 
 <img width="1880" height="783" alt="Screenshot 2026-06-02 000414" src="https://github.com/user-attachments/assets/b92ed56b-5967-426b-8931-9a1de6a9639e" />
 
+![alt text](<Screenshot 2026-06-06 145948.png>)
+
+![alt text](<Screenshot 2026-06-06 150001.png>)
 
 ## 💻 Installation
 
