@@ -2,7 +2,7 @@ import pandas as pd
 import pickle
 import string
 import nltk
-
+import numpy as np
 from nltk.corpus import stopwords
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -75,6 +75,38 @@ rf_model = RandomForestClassifier(
 rf_model.fit(X_train, y_train)
 
 rf_pred = rf_model.predict(X_test)
+
+# ---------------------------------
+# SAVE FEATURE IMPORTANCE
+# ---------------------------------
+
+feature_names = vectorizer.get_feature_names_out()
+
+importances = rf_model.feature_importances_
+
+feature_df = pd.DataFrame({
+
+    "word": feature_names,
+
+    "importance": importances
+
+})
+
+feature_df = feature_df.sort_values(
+
+    by="importance",
+
+    ascending=False
+
+)
+
+feature_df.to_csv(
+
+    "models/feature_importance.csv",
+
+    index=False
+
+)
 
 print("Random Forest Accuracy:",
       accuracy_score(y_test, rf_pred))
